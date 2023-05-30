@@ -18,7 +18,7 @@ sqlConnection.connect((err) => {
     }
     console.log ('Connection has been established to MySQL database')
 });
-// End the connection
-sqlConnection.end();
+// // End the connection
+// sqlConnection.end();
 
 module.exports = sqlConnection;
