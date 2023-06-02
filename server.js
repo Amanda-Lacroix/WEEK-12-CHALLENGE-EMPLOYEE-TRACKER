@@ -4,7 +4,7 @@ const sqlConnection = require('./config/connection/connection.js');
 const consoleTable = require('console.table');
 
 // Query the database
-sqlConnection.query('SELECT * FROM your_table', (err, results) => {
+sqlConnection.query('SELECT * FROM employee_db', (err, results) => {
     if (err) {
       console.error('Error executing query:', err);
       return;
@@ -15,9 +15,18 @@ sqlConnection.query('SELECT * FROM your_table', (err, results) => {
     console.table(results);
   });
 
+  
 // Array of questions for user input into database
-// inquirer
-// .prompt ([
+inquirer
+.prompt ([
+      {
+        name: `license`,
+        type: `list`,
+        message: "The application is covered under license:",
+        choices: [`Apache`,`Eclipse`,`GNU`,`MIT`],
+
+    },
+
 //     {
 //         name: `title`,
 //         type: `input`,
@@ -63,15 +72,8 @@ sqlConnection.query('SELECT * FROM your_table', (err, results) => {
 //         'https://gist.github.com/ulises-jeremias/ebcacbc50c64d4e04bc8b161e2fa44a9'],
          
 //     },
-//     {
-//         name: `license`,
-//         type: `list`,
-//         message: "The application is covered under license:",
-//         choices: [`Apache`,`Eclipse`,`GNU`,`MIT`],
 
-//     },
-
-//   ])
+  ])
 
 
 // .then((answers) => {

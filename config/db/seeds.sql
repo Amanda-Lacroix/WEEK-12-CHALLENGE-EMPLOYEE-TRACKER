@@ -7,10 +7,10 @@ VALUES
 ('Human Resources');
 
 
-INSERT INTO role (title, salary, deptartment_id )
+INSERT INTO role (title, salary, department_id )
 VALUES 
 ('Regional Manager', 69000, 1),
-('Sales Representative & Assistant to the Regional Manager', 50000, 3),
+('Assistant to the Regional Manager', 50000, 3),
 ('Sales Representative', 77000, 2),
 ('Warehouse Foreman', 75000, 4),
 ('Supplier Relations', 43500, 3),
@@ -32,7 +32,7 @@ INSERT INTO employee (first_name, last_name, role_id, manager_id )
 VALUES 
 ('Michael', 'Scott', 1, NULL),          
 ('Dwight', 'Schrute', 2, 1),          
-('Jim,','Halpert', 3, 11),           
+('Jim','Halpert', 3, 11),           
 ('Darryl', 'Philbin', 4, 1),        
 ('Meredith', 'Palmer', 5, 1),       
 ('Creed', 'Bratton', 6, NULL),         
