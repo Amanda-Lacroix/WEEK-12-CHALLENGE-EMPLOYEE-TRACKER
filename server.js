@@ -29,6 +29,12 @@ function optionsList() {
         viewEmployee();
       break;
       case 'Add an Employee':
+        addDepartment();
+      break;
+      case 'Add an Employee':
+        addRole();
+      break;
+      case 'Add an Employee':
         addEmployee();
       break;
       // exit the connection
@@ -73,19 +79,83 @@ function viewEmployee() {
     });
   }
   
+  // Function to Add a Department
+function addDepartment() {
+    inquirer.prompt ([
+      {
+        name: `departmentName`,
+        type: `input`,
+        message: "Enter Department Name:",
+        
+      },
+   
+    ])
+    
+    .then((answers) => {
+    
+    })
+    
+      }
 
+// Function to add Role
+  function addRole() {
+    inquirer.prompt ([
+        {
+          name: `roleName`,
+          type: `input`,
+          message: "Enter Role Name:",
+          
+        },
+        {
+          name: `salary`,
+          type: `input`,
+          message: "Enter Salary:",
+          
+        },
+        {
+          name: `departmentId`,
+          type: `input`,
+          message: "Enter Department Id:",
+          
+        },
+     
+      ])
+      
+      .then((answers) => {
+      
+      })
+      
+        }
 
 
   // Function to Add an employee
   function addEmployee() {
   inquirer.prompt ([
-    {
-      name: `firstName`,
-      type: `input`,
-      message: "Enter Employees First Name:",
-      
+  {
+  name: `firstName`,
+  type: `input`,
+  message: "Enter Employees First Name:",
+  },
+
+  {
+  name: `lastName`,
+  type: `input`,
+  message: "Enter Employees Last Name:",
+  },
+
+  {
+  name: `roleId`,
+  type: `input`,
+  message: "Enter Employees Role:",
+  },
+
+  {
+  name: `managerId`,
+  type: `input`,
+  message: "Enter Employees Manager Id:",
   },
 ])
+
 .then((answers) => {
 
 })
