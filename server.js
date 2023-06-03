@@ -3,92 +3,38 @@ const inquirer = require('inquirer');
 const sqlConnection = require('./config/connection/connection.js');
 const consoleTable = require('console.table');
 
-// Query the database
-sqlConnection.query('SELECT * FROM employee_db', (err, results) => {
-    if (err) {
-      console.error('Error executing query:', err);
-      return;
-    }
-  
-// Display the results using console.table
-    console.log('Results:');
-    console.table(results);
+// Function to Query the departments
+function viewDepartment() {
+sqlConnection.query('SELECT * FROM department', (err, results) => {
+  if (err) {
+    console.error('Error executing query:', err);
+  };
+  console.log('Results:');
+  console.table(results);
   });
+};
+
 
   
-// Array of questions for user input into database
-inquirer
-.prompt ([
+// Initial Prompt for list of options
+inquirer.prompt ([
       {
-        name: `license`,
+        name: `options`,
         type: `list`,
-        message: "The application is covered under license:",
-        choices: [`Apache`,`Eclipse`,`GNU`,`MIT`],
+        message: "Please make a selection:",
+        choices: [`View All Departments`,`View All Roles`,`View All Employees`,`Add a Department`, 'Add a Role', 'Add an Employee', 'Update an Employee Role'],
 
     },
-
-//     {
-//         name: `title`,
-//         type: `input`,
-//         message: "What is the title of your project?"
-    
-//     },
-
-//     {
-//         name: `description`,
-//         type: `input`,
-//         message: "Provide details of the project?"
-    
-//     },
-//     {
-//         name: `installation`,
-//         type: `input`,
-//         message: "How do you install this application?"
-    
-//     },
-//     {
-//         name: `usage`,
-//         type: `input`,
-//         message: "What is this application used for?"
-    
-//     },
-//     {
-//         name: `questions`,
-//         type: `input`,
-//         message: "Github Username:"
-    
-//     },
-//     {
-//         name: `questionsTwo`,
-//         type: `input`,
-//         message: "Email address:"
-    
-//     },
-//     {
-//         name: `credits`,
-//         type: `checkbox`,
-//         message: "Please click all that apply:",
-//         choices: ['https://github.com/SBoudrias/Inquirer.js', 'Starter code provided by: https://git.bootcampcontent.com/new-brunswick/UNB-VIRT-FSF-PT-01-2023-U-LOLC/', 
-//         'https://gist.github.com/ulises-jeremias/ebcacbc50c64d4e04bc8b161e2fa44a9'],
-         
-//     },
-
   ])
 
+// Runs function based on the choice made by user
+.then((answers) => {
+ switch (answers.options){
+    case 'View All Departments':
+    viewDepartment();
+    break;
+    case 'Exit':
+      inquirer.prompt();
+    break;
+ }});
 
-// .then((answers) => {
-//  const readMe = generateReadme (answers)
-//     // // Write the answers to the README.md
-//     fs.writeFile('README.md', readMe, (err) =>{
-//         // gives error message if applicable otherwise give message that it worked
-//     if (err) {
-    
-//         console.log ("There's been an error");
-//     } 
-//     else{
-//         console.log('README.md created!');
-//     }
-  
-//   });
-
-// });
