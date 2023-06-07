@@ -22,7 +22,7 @@
 
   ## Screenshot
  
-  ![Employee Tracker](Assets/Images/)
+  ![Employee Tracker](assets/images/EmployeeDatabase.jpg)
 
   ## Questions
   CONTACT: Amanda Lacroix
