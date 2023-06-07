@@ -37,6 +37,9 @@ function optionsList() {
       case 'Add an Employee':
         addEmployee();
       break;
+      case 'Update an Employee':
+        updateEmployee();
+      break;
       // exit the connection
       case 'Exit':
         sqlConnection.end();
@@ -44,66 +47,66 @@ function optionsList() {
    }});
   }
 
-// Function to Query the departments
-function viewDepartment() {
-sqlConnection.query('SELECT * FROM department', (err, results) => {
-  if (err) {
-    console.error('Error executing query:', err);
-  }
-  // Shows the table
-   console.table(results);
-  // Takes user back to the Options List
-   optionsList();
-  });
-}
+// // Function to Query the departments
+// function viewDepartment() {
+// sqlConnection.query('SELECT * FROM department', (err, results) => {
+//   if (err) {
+//     console.error('Error executing query:', err);
+//   }
+//   // Shows the table
+//    console.table(results);
+//   // Takes user back to the Options List
+//    optionsList();
+//   });
+// }
 
-// Function to Query the role
-function viewRole() {
-  sqlConnection.query('SELECT * FROM role', (err, results) => {
-    if (err) {
-      console.error('Error executing query:', err);
-    }
-    console.table(results);
-    optionsList();
-    });
-  }
+// // Function to Query the role
+// function viewRole() {
+//   sqlConnection.query('SELECT * FROM role', (err, results) => {
+//     if (err) {
+//       console.error('Error executing query:', err);
+//     }
+//     console.table(results);
+//     optionsList();
+//     });
+//   }
 
-  // Function to Query the employees
-function viewEmployee() {
-  sqlConnection.query('SELECT * FROM employee', (err, results) => {
-    if (err) {
-      console.error('Error executing query:', err);
-    }
-    console.table(results);
-    optionsList();
-    });
-  }
+//   // Function to Query the employees
+// function viewEmployee() {
+//   sqlConnection.query('SELECT * FROM employee', (err, results) => {
+//     if (err) {
+//       console.error('Error executing query:', err);
+//     }
+//     console.table(results);
+//     optionsList();
+//     });
+//   }
   
-  // Function to Add a Department
-function addDepartment() {
-    inquirer.prompt ([
-      {
-        name: `departmentName`,
-        type: `input`,
-        message: "Enter Department Name:",
+//   // Function to Add a Department
+// function addDepartment() {
+//     inquirer.prompt ([
+//       {
+//         name: `departmentName`,
+//         type: `input`,
+//         message: "Enter Department Name:",
         
-      },
+//       },
    
-    ])
+//     ])
     
-    .then((answers) => {
-      const { firstName, lastName, roleId, managerId } = answers;
-      const query = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`;
-      sqlConnection.query(query, [firstName, lastName, roleId, managerId], (err, results) => {
-        if (err) {
-          console.error('Error executing query:', err);
-        } else {
-          console.log('Employee added successfully!');
-          optionsList();
-        }
-      });
-    });
-}
+//     .then((answers) => {
+//       const { departmentName} = answers;
+//       const query = `INSERT INTO department (department_name) VALUES (?)`;
+//       sqlConnection.query(query, [departmentName], (err, results) => {
+//         if (err) {
+//           console.error('Error executing query:', err);
+//         } else {
+//           console.log('Department added successfully!');
+//           optionsList();
+//         }
+//       });
+//     });
+// }
       
 
 // // Function to add Role
@@ -131,10 +134,18 @@ function addDepartment() {
 //       ])
       
 //       .then((answers) => {
-      
-//       })
-      
-//         }
+//         const { roleName, salary, departmentId } = answers;
+//         const query = `INSERT INTO role (title, salary, department_id) VALUES (?, ?, ?)`;
+//         sqlConnection.query(query, [roleName, salary, departmentId], (err, results) => {
+//           if (err) {
+//             console.error('Error executing query:', err);
+//           } else {
+//             console.log('Role added successfully!');
+//             optionsList();
+//           }
+//         });
+//       });
+//   }
 
 
 //   // Function to Add an employee
@@ -155,22 +166,57 @@ function addDepartment() {
 //     {
 //       name: `roleId`,
 //       type: `input`,
-//       message: "Enter Employees Role:",
+//       message: "Enter Employees Role Id  #:",
 //     },
 
 //     {
 //       name: `managerId`,
 //       type: `input`,
-//       message: "Enter Employees Manager Id:",
+//       message: "Enter Employees Manager Id #:",
 //     },
 //     ])
 
 // .then((answers) => {
-//   sqlConnection.query()
-// })
+//   const { firstName, lastName, roleId, managerId } = answers;
+//   const query = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`;
+//   sqlConnection.query(query, [firstName, lastName, roleId, managerId], (err, results) => {
+//     if (err) {
+//       console.error('Error executing query:', err);
+//     } else {
+//       console.log('Employee added successfully!');
+//       optionsList();
+//     }
+//   });
+// });
+// }
 
-//   }
   
+  // Function to update an Employee Role
+  function  updateEmployee() {
+    inquirer.prompt ([
+      {
+        name: `selectEmployee`,
+        type: `list`,
+        message: "Please choose employee:",
+        choices: viewEmployee(),
+        
+      },
+   
+    ])
+    
+    .then((answers) => {
+      const { selectEmployee} = answers;
+      const query = `UPDATE employee (role_id) VALUES (?)`;
+      sqlConnection.query(query, [selectEmployee], (err, results) => {
+        if (err) {
+          console.error('Error executing query:', err);
+        } else {
+          console.log('Updated successfully!');
+          optionsList();
+        }
+      });
+    });
+}
 
 
 optionsList();
