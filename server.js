@@ -28,10 +28,10 @@ function optionsList() {
       case 'View All Employees':
         viewEmployee();
       break;
-      case 'Add an Employee':
+      case 'Add a Department':
         addDepartment();
       break;
-      case 'Add an Employee':
+      case 'Add a Role':
         addRole();
       break;
       case 'Add an Employee':
@@ -92,84 +92,85 @@ function addDepartment() {
     ])
     
     .then((answers) => {
-    
-    })
-    
-      }
-
-// Function to add Role
-  function addRole() {
-    inquirer.prompt ([
-        {
-          name: `roleName`,
-          type: `input`,
-          message: "Enter Role Name:",
-          
-        },
-        {
-          name: `salary`,
-          type: `input`,
-          message: "Enter Salary:",
-          
-        },
-        {
-          name: `departmentId`,
-          type: `input`,
-          message: "Enter Department Id:",
-          
-        },
-     
-      ])
-      
-      .then((answers) => {
-      
-      })
-      
+      const { firstName, lastName, roleId, managerId } = answers;
+      const query = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES (?, ?, ?, ?)`;
+      sqlConnection.query(query, [firstName, lastName, roleId, managerId], (err, results) => {
+        if (err) {
+          console.error('Error executing query:', err);
+        } else {
+          console.log('Employee added successfully!');
+          optionsList();
         }
+      });
+    });
+}
+      
+
+// // Function to add Role
+//   function addRole() {
+//     inquirer.prompt ([
+//         {
+//           name: `roleName`,
+//           type: `input`,
+//           message: "Enter Role Name:",
+          
+//         },
+//         {
+//           name: `salary`,
+//           type: `input`,
+//           message: "Enter Salary:",
+          
+//         },
+//         {
+//           name: `departmentId`,
+//           type: `input`,
+//           message: "Enter Department Id:",
+          
+//         },
+     
+//       ])
+      
+//       .then((answers) => {
+      
+//       })
+      
+//         }
 
 
-  // Function to Add an employee
-  function addEmployee() {
-  inquirer.prompt ([
-  {
-  name: `firstName`,
-  type: `input`,
-  message: "Enter Employees First Name:",
-  },
+//   // Function to Add an employee
+//   function addEmployee() {
+//   inquirer.prompt ([
+//     {
+//       name: `firstName`,
+//       type: `input`,
+//       message: "Enter Employees First Name:",
+//     },
 
-  {
-  name: `lastName`,
-  type: `input`,
-  message: "Enter Employees Last Name:",
-  },
+//     {
+//       name: `lastName`,
+//       type: `input`,
+//       message: "Enter Employees Last Name:",
+//     },
 
-  {
-  name: `roleId`,
-  type: `input`,
-  message: "Enter Employees Role:",
-  },
+//     {
+//       name: `roleId`,
+//       type: `input`,
+//       message: "Enter Employees Role:",
+//     },
 
-  {
-  name: `managerId`,
-  type: `input`,
-  message: "Enter Employees Manager Id:",
-  },
-])
+//     {
+//       name: `managerId`,
+//       type: `input`,
+//       message: "Enter Employees Manager Id:",
+//     },
+//     ])
 
-.then((answers) => {
+// .then((answers) => {
+//   sqlConnection.query()
+// })
 
-})
-
-  }
+//   }
   
-//   {
-//     sqlConnection.query('SELECT * FROM employee', (err, results) => {
-//       if (err) {
-//         console.error('Error executing query:', err);
-//       }
-//       console.table(results);
-//       optionsList();
-//       });
-//     }
+
 
 optionsList();
